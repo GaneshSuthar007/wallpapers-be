@@ -13,6 +13,7 @@ export default () => {
         logging: true,
         type: 'mysql',
       },
+      api_key: 'f4371ab7-2a36-4fe1-9d9f-7e309c30aaf6',
     };
   } else {
     return {
@@ -27,6 +28,7 @@ export default () => {
         logging: false,
         type: 'mysql',
       },
+      api_key: 'f4371ab7-2a36-4fe1-9d9f-7e309c30aaf6',
     };
   }
 };

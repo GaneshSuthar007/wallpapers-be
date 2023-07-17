@@ -10,8 +10,8 @@ export class ApiKeyStrategy extends PassportStrategy(Strategy, 'api-key') {
   }
 
   async validate(request, done) {
-    const apiKey = request.headers['x-rapidapi-proxy-secret'];
-    const validApiKey = this.configService.get<string>('rapid.secret');
+    const apiKey = request.headers['api_key'];
+    const validApiKey = this.configService.get<string>('api_key');
     if (apiKey === validApiKey) {
       return done(null, true);
     }
