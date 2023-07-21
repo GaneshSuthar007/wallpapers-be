@@ -31,7 +31,7 @@ export class ApiController {
     }
   }
 
-  @Get('get-wallapers')
+  @Get('get-wallpapers')
   @UsePipes(new JoiValidationPipe(GetWallpapersSchema))
   async getWallpapers(
     @Query() getWallpapersDTO: GetWallpapersDTO,
