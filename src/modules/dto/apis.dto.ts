@@ -21,3 +21,18 @@ export const GetWallpapersSchema = Joi.object({
   abortEarly: false,
   allowUnknown: false,
 });
+
+export class AddTokenDTO {
+  token: string;
+  device_id: string;
+  app_id: number;
+}
+
+export const AddTokenSchema = Joi.object({
+  token: Joi.string().required(),
+  device_id: Joi.string().required(),
+  app_id: Joi.number().required(),
+}).options({
+  abortEarly: false,
+  allowUnknown: false,
+});

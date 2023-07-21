@@ -9,7 +9,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity('tbll_wallpapers')
+@Entity('tbl_wallpapers')
 export class Wallpapers {
   constructor(data?: Wallpapers) {
     if (typeof data === 'object') {
@@ -24,6 +24,9 @@ export class Wallpapers {
 
   @Column({ type: 'text' })
   url?: string;
+
+  @Column({ type: 'boolean' })
+  is_premium?: boolean;
 
   @ManyToOne(() => Categories, (categories) => categories.wallpapers)
   @JoinColumn({ name: 'category_id' })

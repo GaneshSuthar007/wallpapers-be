@@ -1,17 +1,19 @@
-import { Categories } from './categories.entity';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
-import { Tokens } from './tokens.entity';
+import { Apps } from './apps.entity';
+import { Wallpapers } from './wallpapers.entity';
 
-@Entity('tbl_apps')
-export class Apps {
-  constructor(data?: Apps) {
+@Entity('tbl_tokens')
+export class Tokens {
+  constructor(data?: Tokens) {
     if (typeof data === 'object') {
       Object.keys(data).forEach((index) => {
         this[index] = data[index];
@@ -22,14 +24,15 @@ export class Apps {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ type: 'varchar', unique: true })
-  name?: string;
+  @Column({ type: 'varchar' })
+  device_id?: string;
 
-  @OneToMany(() => Categories, (categories) => categories.app)
-  categories?: Categories[];
+  @Column({ type: 'varchar' })
+  token?: string;
 
-  @OneToMany(() => Tokens, (token) => token.app)
-  toekn?: Tokens[];
+  @ManyToOne(() => Apps, (apps) => apps.categories)
+  @JoinColumn({ name: 'app_id' })
+  app?: Apps;
 
   @CreateDateColumn({
     type: 'timestamp',

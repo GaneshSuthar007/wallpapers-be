@@ -1,6 +1,8 @@
 import { ApiService } from './apis.service';
 import { Controller, Get, Query, Res, UsePipes } from '@nestjs/common';
 import {
+  AddTokenDTO,
+  AddTokenSchema,
   GetCategoriesDTO,
   GetCategoriesSchema,
   GetWallpapersDTO,
@@ -38,6 +40,17 @@ export class ApiController {
     try {
       const data = await this.apiService.getWallpapers(getWallpapersDTO);
       success(response, data, apis.wallpapersFetchSuccess);
+    } catch (e) {
+      error(response, null, e.message);
+    }
+  }
+
+  @Get('add-token')
+  @UsePipes(new JoiValidationPipe(AddTokenSchema))
+  async addToken(@Query() addTokenDTO: AddTokenDTO, @Res() response: Response) {
+    try {
+      const data = await this.apiService.addToken(addTokenDTO);
+      success(response, data, apis.tokenAddedSuccess);
     } catch (e) {
       error(response, null, e.message);
     }
