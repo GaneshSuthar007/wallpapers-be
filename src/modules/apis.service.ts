@@ -56,10 +56,11 @@ export class ApiService {
 
   async getWallpapers(getWallpapersDTO: GetWallpapersDTO) {
     try {
-      const { category_id } = getWallpapersDTO;
+      const { category_id, app_id } = getWallpapersDTO;
       const data = this.wallpapersRepo
         .createQueryBuilder('wallpaper')
         .where(category_id ? { category: { id: category_id } } : {})
+        .andWhere({ app: { id: app_id } })
         .select(['wallpaper.id', 'wallpaper.url', 'wallpaper.is_premium'])
         .orderBy('RAND()')
         .take(category_id ? undefined : 40)

@@ -13,10 +13,12 @@ export const GetCategoriesSchema = Joi.object({
 
 export class GetWallpapersDTO {
   category_id: number;
+  app_id: number;
 }
 
 export const GetWallpapersSchema = Joi.object({
   category_id: Joi.number().optional(),
+  app_id: Joi.number().required(),
 }).options({
   abortEarly: false,
   allowUnknown: false,

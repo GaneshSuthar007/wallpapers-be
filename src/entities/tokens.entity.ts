@@ -5,11 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToMany,
   JoinColumn,
 } from 'typeorm';
 import { Apps } from './apps.entity';
-import { Wallpapers } from './wallpapers.entity';
 
 @Entity('tbl_tokens')
 export class Tokens {

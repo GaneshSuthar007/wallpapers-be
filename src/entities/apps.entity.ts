@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Tokens } from './tokens.entity';
+import { Wallpapers } from './wallpapers.entity';
 
 @Entity('tbl_apps')
 export class Apps {
@@ -30,6 +31,9 @@ export class Apps {
 
   @OneToMany(() => Tokens, (token) => token.app)
   toekn?: Tokens[];
+
+  @OneToMany(() => Wallpapers, (wallpapers) => wallpapers.app)
+  wallpapers?: Wallpapers[];
 
   @CreateDateColumn({
     type: 'timestamp',

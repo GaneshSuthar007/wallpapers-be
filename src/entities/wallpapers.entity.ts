@@ -1,3 +1,4 @@
+import { Apps } from './apps.entity';
 import { Categories } from './categories.entity';
 import {
   Column,
@@ -31,6 +32,10 @@ export class Wallpapers {
   @ManyToOne(() => Categories, (categories) => categories.wallpapers)
   @JoinColumn({ name: 'category_id' })
   category?: Categories;
+
+  @ManyToOne(() => Apps, (apps) => apps.wallpapers)
+  @JoinColumn({ name: 'app_id' })
+  app?: Apps;
 
   @CreateDateColumn({
     type: 'timestamp',
