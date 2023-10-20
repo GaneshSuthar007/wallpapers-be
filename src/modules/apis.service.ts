@@ -47,7 +47,9 @@ export class ApiService {
         },
       });
 
-      return data;
+      return {
+        categories: data,
+      };
     } catch (e) {
       Logger.error(e);
       throw new BadRequestException(apis.failedToFetchCategories);
@@ -57,7 +59,7 @@ export class ApiService {
   async getWallpapers(getWallpapersDTO: GetWallpapersDTO) {
     try {
       const { category_id, app_id } = getWallpapersDTO;
-      const data = this.wallpapersRepo
+      const data = await this.wallpapersRepo
         .createQueryBuilder('wallpaper')
         .where(category_id ? { category: { id: category_id } } : {})
         .andWhere({ app: { id: app_id } })
@@ -65,7 +67,9 @@ export class ApiService {
         .orderBy('RAND()')
         .take(category_id ? undefined : 40)
         .getMany();
-      return data;
+      return {
+        wallpapers: data,
+      };
     } catch (e) {
       Logger.error(e);
       throw new BadRequestException(apis.failedToFetchWallpapers);
